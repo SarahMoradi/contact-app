@@ -6,6 +6,8 @@ import ContactList from "./components/ContactList/ContactList";
 function App() {
   const [contactList, setContactList] = useState([]);
   const deleteHandler = (id) => {
+    const index = contactList.filter((item) => item.id !== id);
+    setContactList(index);
     console.log(id, "delete");
   };
   const addContacthandler = (contact) => {
