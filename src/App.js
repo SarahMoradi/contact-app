@@ -5,11 +5,12 @@ import ContactList from "./components/ContactList/ContactList";
 
 function App() {
   const [contactList, setContactList] = useState([]);
+
   const deleteHandler = (id) => {
-    const index = contactList.filter((item) => item.id !== id);
-    setContactList(index);
-    console.log(id, "delete");
+    const filteredContact = contactList.filter((item) => item.id !== id);
+    setContactList(filteredContact);
   };
+
   const addContacthandler = (contact) => {
     console.log(contact);
     setContactList([
@@ -20,10 +21,10 @@ function App() {
   return (
     <main className="App">
       <h1>Contact App</h1>
-      <section>Add Contact</section>
+      {/* <section>Add Contact</section> */}
       <AddContact addContacthandler={addContacthandler} />
-      <section>Contact List</section>
-      <ContactList contactList={contactList} deleteHandler={deleteHandler} />
+      {/* <section>Contact List</section> */}
+      <ContactList contactList={contactList} onDelete={deleteHandler} />
     </main>
   );
 }

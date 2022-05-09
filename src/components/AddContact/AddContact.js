@@ -1,14 +1,19 @@
 import { useState } from "react";
+import "./AddContact.css";
 const AddContact = ({ addContacthandler }) => {
   const [contact, setContact] = useState({ name: "", email: "" });
-  const nameInputChangeHandler = (e) => {
+  const inputChangeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e) => {
+    if (!contact.name || !contact.email) {
+      alert("All fields are neccessary to be filled!");
+      return;
+    }
     e.preventDefault();
     addContacthandler(contact);
-    setContact({ name: " ", email: " " });
+    setContact({ name: "", email: "" });
   };
 
   return (
@@ -19,7 +24,7 @@ const AddContact = ({ addContacthandler }) => {
           type="text"
           name="name"
           value={contact.name}
-          onChange={nameInputChangeHandler}
+          onChange={inputChangeHandler}
         />
       </div>
       <div className="formControl">
@@ -28,10 +33,10 @@ const AddContact = ({ addContacthandler }) => {
           type="email"
           name="email"
           value={contact.email}
-          onChange={nameInputChangeHandler}
+          onChange={inputChangeHandler}
         />
       </div>
-      <button type="submit">Add Contact</button>
+      <button type="submit" className="deleteButton">Add Contact</button>
     </form>
   );
 };
